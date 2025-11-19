@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireIQ AI - Future of Recruitment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 0, 0.1) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* Glowing particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #00ffff, transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            50% { transform: translateY(-100px) rotate(180deg); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo::before {
+            content: '🤖';
+            filter: hue-rotate(180deg);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logout-btn {
+            background: linear-gradient(45deg, #ff0040, #ff4080);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.3);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 30px rgba(255, 0, 64, 0.6);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.3) drop-shadow(0 0 10px rgba(0, 255, 255, 0.5)); }
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        /* AI Bots Grid */
+        .bots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .bot-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .bot-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(0, 255, 255, 0.8);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(0, 255, 255, 0.3);
+        }
+
+        .bot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .bot-card:hover::before {
+            left: 100%;
+        }
+
+        .bot-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .resume-analyzer .bot-icon { color: #00ffff; }
+        .job-search .bot-icon { color: #ff00ff; }
+        .career-advisor .bot-icon { color: #ffff00; }
+
+        .bot-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .bot-description {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .bot-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00ff00;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .bot-metrics {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ffff;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .activate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, #0066cc, #00ccff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activate-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .activate-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .activate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 204, 255, 0.4);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translate(-50%, -60%) scale(0.9); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            padding-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #ff0040;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-input::placeholder, .form-textarea::placeholder {
+            color: #888;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-btn {
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 2px dashed rgba(0, 255, 255, 0.5);
+            border-radius: 15px;
+            color: #00ffff;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-upload-btn:hover {
+            border-color: #00ffff;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        /* Results Section */
+        .results-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .skill-pill {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            background: linear-gradient(45deg, #00ffff, #0088cc);
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9rem;
+            animation: skillGlow 2s infinite alternate;
+        }
+
+        @keyframes skillGlow {
+            from { box-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
+            to { box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #00ffff, #00ff88);
+            border-radius: 10px;
+            transition: width 1s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            height: 400px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: messageSlideIn 0.3s ease-out;
+        }
+
+        @keyframes messageSlideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .chat-message.user {
+            background: linear-gradient(45deg, #0066cc, #00ccff);
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .chat-message.bot {
+            background: linear-gradient(45deg, #333, #555);
+            margin-right: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            gap: 1rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 25px;
+            color: white;
+        }
+
+        .send-btn {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, #00ff88, #00ffff);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .bots-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .bot-card {
+                padding: 1.5rem;
+            }
+            
+            .modal-content {
+                width: 95vw;
+                padding: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #00ffff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(45deg, #00ff88, #00ffff);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 3000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            HireIQ
+        </div>
+        <div class="user-info">
+            <div class="user-avatar">AI</div>
+            <span>Welcome, Future Recruiter!</span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1 class="welcome-title">AI-Powered Recruitment Hub</h1>
+            <p class="welcome-subtitle">Harness the power of artificial intelligence to revolutionize your hiring process</p>
+        </div>
+
+        <!-- AI Bots Grid -->
+        <div class="bots-grid">
+            <!-- Resume Analyzer Bot -->
+            <div class="bot-card resume-analyzer" onclick="openBot('resume-analyzer')">
+                <span class="bot-icon">🧠</span>
+                <h3 class="bot-title">Resume Analyzer AI</h3>
+                <p class="bot-description">Advanced neural networks analyze resumes with 99.7% accuracy, extracting skills, experience, and potential matches in milliseconds.</p>
+                
+                <div class="bot-status">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Online</span>
+                    </div>
+                    <span>v3.2.1</span>
+                </div>
+
+                <div class="bot-metrics">
+                    <div class="metric">
+                        <div class="metric-value">47K</div>
+                        <div class="metric-label">Resumes Analyzed</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">98.5%</div>
+                        <div class="metric-label">Accuracy Rate</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">2.3s</div>
+                        <div class="metric-label">Avg Processing</div>
+                    </div>
+                </div>
+
+                <button class="activate-btn">
+                    <span>Activate Neural Scanner</span>
+                </button>
+            </div>
+
+            <!-- Job Search Bot -->
+            <div class="bot-card job-search" onclick="openBot('job-search')">
+                <span class="bot-icon">🎯</span>
+                <h3 class="bot-title">Job Hunter AI</h3>
+                <p class="bot-description">Quantum-powered job matching algorithm that searches across 10M+ positions, delivering personalized opportunities in real-time.</p>
+                
+                <div class="bot-status">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Online</span>
+                    </div>
+                    <span>v4.1.0</span>
+                </div>
+
+                <div class="bot-metrics">
+                    <div class="metric">
+                        <div class="metric-value">10M+</div>
+                        <div class="metric-label">Job Database</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">94.2%</div>
+                        <div class="metric-label">Match Success</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">0.8s</div>
+                        <div class="metric-label">Search Speed</div>
+                    </div>
+                </div>
+
+                <button class="activate-btn">
+                    <span>Launch Job Hunter</span>
+                </button>
+            </div>
+
+            <!-- Career Advisor Bot -->
+            <div class="bot-card career-advisor" onclick="openBot('career-advisor')">
+                <span class="bot-icon">🚀</span>
+                <h3 class="bot-title">Career Strategist AI</h3>
+                <p class="bot-description">Predictive analytics and machine learning create personalized career roadmaps, forecasting optimal paths for professional growth.</p>
+                
+                <div class="bot-status">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Online</span>
+                    </div>
+                    <span>v2.8.3</span>
+                </div>
+
+                <div class="bot-metrics">
+                    <div class="metric">
+                        <div class="metric-value">25K</div>
+                        <div class="metric-label">Career Paths</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">89.7%</div>
+                        <div class="metric-label">Success Rate</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">15min</div>
+                        <div class="metric-label">Analysis Time</div>
+                    </div>
+                </div>
+
+                <button class="activate-btn">
+                    <span>Initiate Strategy AI</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Resume Analyzer Modal -->
+    <div class="modal" id="resume-analyzer-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🧠 Resume Analyzer AI</h2>
+                <button class="close-btn" onclick="closeModal('resume-analyzer-modal')">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Upload Resume for Neural Analysis</label>
+                <div class="file-upload">
+                    <div class="file-upload-btn">
+                        <input type="file" accept=".pdf,.docx,.doc" onchange="handleFileUpload(event, 'resume')">
+                        <div>
+                            📄 Drop your resume here or click to browse<br>
+                            <small>Supported formats: PDF, DOCX, DOC</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section" id="resume-results" style="display: none;">
+                <h3>🔍 Neural Analysis Results</h3>
+                <div id="extracted-skills"></div>
+                <div id="resume-score"></div>
+                <div id="recommendations"></div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-messages" id="resume-chat">
+                    <div class="chat-message bot">
+                        👋 Hello! I'm your Resume Analyzer AI. Upload your resume and I'll provide detailed insights about your skills, experience, and improvement suggestions.
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Ask about job market trends, salaries, or specific companies..." id="job-chat-input">
+                    <button class="send-btn" onclick="sendMessage('job-chat')">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Career Advisor Modal -->
+    <div class="modal" id="career-advisor-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🚀 Career Strategist AI</h2>
+                <button class="close-btn" onclick="closeModal('career-advisor-modal')">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Current Role & Experience</label>
+                <input type="text" class="form-input" placeholder="e.g., Software Engineer with 3 years experience" id="current-role">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Career Goals</label>
+                <textarea class="form-textarea" rows="3" placeholder="Describe your short-term and long-term career aspirations..." id="career-goals"></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                <div class="form-group">
+                    <label class="form-label">Preferred Industry</label>
+                    <select class="form-select" id="preferred-industry">
+                        <option>Technology</option>
+                        <option>Healthcare</option>
+                        <option>Finance</option>
+                        <option>Education</option>
+                        <option>Manufacturing</option>
+                        <option>Consulting</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Work Style Preference</label>
+                    <select class="form-select" id="work-style">
+                        <option>Remote</option>
+                        <option>Hybrid</option>
+                        <option>On-site</option>
+                        <option>Flexible</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="activate-btn" onclick="generateCareerPlan()" style="margin-bottom: 2rem;">
+                🧭 Generate AI Career Roadmap
+            </button>
+
+            <div class="results-section" id="career-results" style="display: none;">
+                <h3>🗺️ Your Personalized Career Roadmap</h3>
+                <div id="career-path"></div>
+                <div id="skill-development"></div>
+                <div id="timeline"></div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-messages" id="career-chat">
+                    <div class="chat-message bot">
+                        🚀 I'm your Career Strategist AI! I use predictive analytics to create personalized career roadmaps. Tell me about your current situation and where you want to be, and I'll chart the optimal path forward.
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Ask about career transitions, skill development, or industry trends..." id="career-chat-input">
+                    <button class="send-btn" onclick="sendMessage('career-chat')">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numberOfParticles = 50;
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 2-6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles on page load
+        createParticles();
+
+        // Bot interaction functions
+        function openBot(botType) {
+            const modal = document.getElementById(botType + '-modal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Trigger entrance animation
+            setTimeout(() => {
+                modal.querySelector('.modal-content').style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 10);
+            
+            showNotification(`${botType.charAt(0).toUpperCase() + botType.slice(1)} AI activated!`);
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // File upload handler
+        function handleFileUpload(event, type) {
+            const file = event.target.files[0];
+            if (file) {
+                const fileName = file.name;
+                const fileSize = (file.size / 1024 / 1024).toFixed(2);
+                
+                showNotification(`Uploading ${fileName} (${fileSize}MB)...`);
+                
+                // Simulate file processing
+                setTimeout(() => {
+                    if (type === 'resume') {
+                        processResume(fileName);
+                    }
+                }, 2000);
+            }
+        }
+
+        // Resume processing simulation
+        function processResume(fileName) {
+            const resultsSection = document.getElementById('resume-results');
+            const skillsDiv = document.getElementById('extracted-skills');
+            const scoreDiv = document.getElementById('resume-score');
+            const recommendationsDiv = document.getElementById('recommendations');
+            
+            // Show results section
+            resultsSection.style.display = 'block';
+            
+            // Simulate extracted skills
+            const skills = ['JavaScript', 'Python', 'React', 'Node.js', 'AWS', 'Docker', 'MongoDB', 'Git'];
+            skillsDiv.innerHTML = '<h4>🔍 Extracted Skills</h4><div>' + 
+                skills.map(skill => `<span class="skill-pill">${skill}</span>`).join('') + '</div>';
+            
+            // Simulate resume score
+            setTimeout(() => {
+                scoreDiv.innerHTML = `
+                    <h4>📊 Resume Score</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 87%"></div>
+                    </div>
+                    <p>87/100 - Excellent resume quality!</p>
+                `;
+            }, 1000);
+            
+            // Simulate recommendations
+            setTimeout(() => {
+                recommendationsDiv.innerHTML = `
+                    <h4>💡 AI Recommendations</h4>
+                    <ul style="color: #ccc; line-height: 1.8;">
+                        <li>✅ Strong technical skill set detected</li>
+                        <li>🔸 Consider adding quantifiable achievements</li>
+                        <li>🔸 Include more soft skills to stand out</li>
+                        <li>✅ Resume format is ATS-friendly</li>
+                    </ul>
+                `;
+            }, 2000);
+            
+            // Add chat message
+            addChatMessage('resume-chat', 'bot', `✨ Analysis complete! I've processed ${fileName} and extracted ${skills.length} key skills. Your resume scores 87/100 - that's excellent! I've also provided personalized recommendations to make it even stronger.`);
+            
+            showNotification('Resume analysis complete!');
+        }
+
+        // Job search function
+        function searchJobs() {
+            const location = document.getElementById('job-location').value;
+            const experience = document.getElementById('experience-level').value;
+            const keywords = document.getElementById('job-keywords').value;
+            const salaryMin = document.getElementById('salary-min').value;
+            const salaryMax = document.getElementById('salary-max').value;
+            
+            showNotification('🎯 Quantum job search initiated...');
+            
+            setTimeout(() => {
+                const resultsSection = document.getElementById('job-results');
+                const jobListings = document.getElementById('job-listings');
+                
+                resultsSection.style.display = 'block';
+                
+                // Mock job results
+                const jobs = [
+                    {
+                        title: 'Senior Software Engineer',
+                        company: 'TechCorp AI',
+                        location: 'San Francisco, CA',
+                        salary: '$150,000 - $200,000',
+                        match: 94
+                    },
+                    {
+                        title: 'Full Stack Developer',
+                        company: 'InnovateLab',
+                        location: 'Remote',
+                        salary: '$120,000 - $160,000',
+                        match: 89
+                    },
+                    {
+                        title: 'Data Scientist',
+                        company: 'AI Dynamics',
+                        location: 'New York, NY',
+                        salary: '$140,000 - $180,000',
+                        match: 86
+                    }
+                ];
+                
+                jobListings.innerHTML = jobs.map(job => `
+                    <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; border-left: 4px solid #00ffff;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <div>
+                                <h4 style="color: #00ffff; margin-bottom: 0.5rem;">${job.title}</h4>
+                                <p style="color: #ccc; margin-bottom: 0.5rem;">${job.company} • ${job.location}</p>
+                                <p style="color: #00ff88; font-weight: bold;">${job.salary}</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="background: linear-gradient(45deg, #00ffff, #00ff88); padding: 0.5rem 1rem; border-radius: 20px; color: black; font-weight: bold; margin-bottom: 0.5rem;">
+                                    ${job.match}% Match
+                                </div>
+                                <button style="background: linear-gradient(45deg, #0066cc, #00ccff); border: none; padding: 0.5rem 1rem; border-radius: 15px; color: white; cursor: pointer;">
+                                    Apply Now
+                                </button>
+                            </div>
+                        </div>
+                        <div class="progress-bar" style="height: 8px;">
+                            <div class="progress-fill" style="width: ${job.match}%"></div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                addChatMessage('job-chat', 'bot', `🎯 Found ${jobs.length} high-match opportunities! The quantum algorithm analyzed 10M+ positions and selected these based on your profile. The top match is ${jobs[0].title} at ${jobs[0].company} with ${jobs[0].match}% compatibility.`);
+                
+                showNotification(`Found ${jobs.length} perfect job matches!`);
+            }, 3000);
+        }
+
+        // Career plan generation
+        function generateCareerPlan() {
+            const currentRole = document.getElementById('current-role').value;
+            const careerGoals = document.getElementById('career-goals').value;
+            const industry = document.getElementById('preferred-industry').value;
+            const workStyle = document.getElementById('work-style').value;
+            
+            showNotification('🧭 AI analyzing career trajectory...');
+            
+            setTimeout(() => {
+                const resultsSection = document.getElementById('career-results');
+                const careerPath = document.getElementById('career-path');
+                const skillDevelopment = document.getElementById('skill-development');
+                const timeline = document.getElementById('timeline');
+                
+                resultsSection.style.display = 'block';
+                
+                // Career path
+                careerPath.innerHTML = `
+                    <h4>🗺️ Optimal Career Path</h4>
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 15px; margin-bottom: 1rem;">
+                        <div style="background: #00ffff; color: black; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold;">Current</div>
+                        <div style="color: #00ffff;">→</div>
+                        <div style="background: #00ff88; color: black; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold;">Senior Role</div>
+                        <div style="color: #00ffff;">→</div>
+                        <div style="background: #ffff00; color: black; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold;">Team Lead</div>
+                        <div style="color: #00ffff;">→</div>
+                        <div style="background: #ff00ff; color: white; padding: 0.5rem 1rem; border-radius: 10px; font-weight: bold;">Director</div>
+                    </div>
+                `;
+                
+                // Skill development
+                skillDevelopment.innerHTML = `
+                    <h4>🧠 Priority Skills to Develop</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="background: rgba(0,255,255,0.1); padding: 1rem; border-radius: 10px; border: 1px solid #00ffff;">
+                            <h5 style="color: #00ffff;">Technical Skills</h5>
+                            <div class="skill-pill">Cloud Architecture</div>
+                            <div class="skill-pill">Machine Learning</div>
+                            <div class="skill-pill">System Design</div>
+                        </div>
+                        <div style="background: rgba(0,255,0,0.1); padding: 1rem; border-radius: 10px; border: 1px solid #00ff88;">
+                            <h5 style="color: #00ff88;">Leadership Skills</h5>
+                            <div class="skill-pill">Team Management</div>
+                            <div class="skill-pill">Strategic Planning</div>
+                            <div class="skill-pill">Mentoring</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Timeline
+                timeline.innerHTML = `
+                    <h4>⏱️ Projected Timeline</h4>
+                    <div style="position: relative; padding-left: 2rem;">
+                        <div style="position: absolute; left: 1rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #00ffff, #00ff88, #ffff00, #ff00ff);"></div>
+                        <div style="margin-bottom: 2rem; position: relative;">
+                            <div style="position: absolute; left: -1.5rem; width: 12px; height: 12px; background: #00ffff; border-radius: 50%;"></div>
+                            <strong style="color: #00ffff;">6 Months:</strong> Master cloud technologies & leadership fundamentals
+                        </div>
+                        <div style="margin-bottom: 2rem; position: relative;">
+                            <div style="position: absolute; left: -1.5rem; width: 12px; height: 12px; background: #00ff88; border-radius: 50%;"></div>
+                            <strong style="color: #00ff88;">1 Year:</strong> Transition to senior role with team responsibilities
+                        </div>
+                        <div style="margin-bottom: 2rem; position: relative;">
+                            <div style="position: absolute; left: -1.5rem; width: 12px; height: 12px; background: #ffff00; border-radius: 50%;"></div>
+                            <strong style="color: #ffff00;">2-3 Years:</strong> Lead larger teams and strategic initiatives
+                        </div>
+                        <div style="position: relative;">
+                            <div style="position: absolute; left: -1.5rem; width: 12px; height: 12px; background: #ff00ff; border-radius: 50%;"></div>
+                            <strong style="color: #ff00ff;">3-5 Years:</strong> Director-level position with organizational impact
+                        </div>
+                    </div>
+                `;
+                
+                addChatMessage('career-chat', 'bot', `🚀 Your personalized career roadmap is ready! Based on your ${industry} industry preference and ${workStyle} work style, I've mapped an optimal 5-year trajectory. The AI predicts a 89% success probability following this path.`);
+                
+                showNotification('Career roadmap generated successfully!');
+            }, 4000);
+        }
+
+        // Chat functionality
+        function sendMessage(chatType) {
+            const input = document.getElementById(chatType + '-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                addChatMessage(chatType, 'user', message);
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const responses = {
+                        'resume-chat': [
+                            "Great question! Based on your resume analysis, I recommend focusing on quantifiable achievements. For example, instead of 'Improved system performance,' try 'Improved system performance by 40%, reducing load times from 3s to 1.8s.'",
+                            "Your technical skills are strong! To stand out more, consider adding certifications like AWS Solutions Architect or Google Cloud Professional. These show commitment to continuous learning.",
+                            "I notice your resume could benefit from more industry-specific keywords. Based on the jobs you're targeting, consider incorporating terms like 'microservices,' 'CI/CD,' and 'agile methodologies.'"
+                        ],
+                        'job-chat': [
+                            "The current job market shows high demand for your skill set! Remote positions have increased 300% in the past year, and companies are offering 15-20% salary premiums for top talent.",
+                            "Based on market analysis, companies in your target range are actively hiring. The average time-to-hire has decreased to 18 days, suggesting urgent need for qualified candidates.",
+                            "Pro tip: Companies using modern tech stacks (React, Node.js, cloud platforms) typically offer better work-life balance and growth opportunities. I've filtered your results to prioritize these."
+                        ],
+                        'career-chat': [
+                            "Career transitions in tech typically take 6-18 months when done strategically. The key is building a bridge of transferable skills while gradually acquiring new ones. Would you like me to create a specific transition plan?",
+                            "Industry data shows that professionals who invest in continuous learning see 23% faster career advancement. I recommend dedicating 5-10 hours per week to skill development for optimal results.",
+                            "The most successful career moves combine technical growth with leadership development. Consider taking on mentorship roles or cross-functional projects to demonstrate leadership potential."
+                        ]
+                    };
+                    
+                    const responseList = responses[chatType] || ["That's an interesting question! Let me analyze that for you..."];
+                    const randomResponse = responseList[Math.floor(Math.random() * responseList.length)];
+                    
+                    addChatMessage(chatType, 'bot', randomResponse);
+                }, 1000 + Math.random() * 2000);
+            }
+        }
+
+        // Add chat message
+        function addChatMessage(chatType, sender, message) {
+            const chatMessages = document.getElementById(chatType);
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Enter key support for chat
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.id.includes('chat-input')) {
+                const chatType = e.target.id.replace('-input', '');
+                sendMessage(chatType);
+            }
+        });
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                showNotification('Logging out... See you in the future!');
+                setTimeout(() => {
+                    // In a real app, this would redirect to login
+                    location.reload();
+                }, 2000);
+            }
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Dynamic particle repositioning
+        setInterval(() => {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                if (Math.random() > 0.98) {
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                }
+            });
+        }, 5000);
+
+        // Welcome message
+        setTimeout(() => {
+            showNotification('Welcome to the future of recruitment! 🚀');
+        }, 1000);
+    </script>
+</body>
+</html>">
+                    <input type="text" placeholder="Ask me anything about your resume..." id="resume-chat-input">
+                    <button class="send-btn" onclick="sendMessage('resume-chat')">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Search Modal -->
+    <div class="modal" id="job-search-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🎯 Job Hunter AI</h2>
+                <button class="close-btn" onclick="closeModal('job-search-modal')">&times;</button>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                <div class="form-group">
+                    <label class="form-label">Target Location</label>
+                    <input type="text" class="form-input" placeholder="e.g., San Francisco, Remote" id="job-location">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Experience Level</label>
+                    <select class="form-select" id="experience-level">
+                        <option>Entry Level</option>
+                        <option>Mid Level</option>
+                        <option>Senior Level</option>
+                        <option>Executive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Job Title or Keywords</label>
+                <input type="text" class="form-input" placeholder="e.g., Software Engineer, Data Scientist" id="job-keywords">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Salary Range (USD)</label>
+                <div style="display: flex; gap: 1rem;">
+                    <input type="number" class="form-input" placeholder="Min" id="salary-min">
+                    <input type="number" class="form-input" placeholder="Max" id="salary-max">
+                </div>
+            </div>
+
+            <button class="activate-btn" onclick="searchJobs()" style="margin-bottom: 2rem;">
+                🚀 Launch Quantum Job Search
+            </button>
+
+            <div class="results-section" id="job-results" style="display: none;">
+                <h3>🎯 Matching Opportunities</h3>
+                <div id="job-listings"></div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-messages" id="job-chat">
+                    <div class="chat-message bot">
+                        🎯 Ready to find your perfect job? I can search through millions of opportunities and find matches based on your skills and preferences. What type of role are you looking for?
+                    </div>
+                </div>
+                <div class="chat-input

@@ -1,0 +1,23 @@
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f2f4f8;stop-opacity:1" />
+    </linearGradient>
+    <!-- IBM 8-bar logo pattern -->
+    <pattern id="ibm-pattern" width="160" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect x="0" y="0" width="20" height="80" fill="#0f62fe" opacity="0.03"/>
+      <rect x="30" y="0" width="20" height="80" fill="#0f62fe" opacity="0.03"/>
+      <rect x="60" y="0" width="20" height="50" fill="#0f62fe" opacity="0.03"/>
+      <rect x="90" y="0" width="20" height="80" fill="#0f62fe" opacity="0.03"/>
+      <rect x="120" y="0" width="20" height="60" fill="#0f62fe" opacity="0.03"/>
+      <rect x="150" y="0" width="10" height="80" fill="#0f62fe" opacity="0.03"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grad1)"/>
+  <rect width="100%" height="100%" fill="url(#ibm-pattern)"/>
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="100%" height="8" fill="#0f62fe" opacity="0.8"/>
+  <!-- Bottom accent bar -->
+  <rect x="0" y="1072" width="100%" height="8" fill="#0f62fe" opacity="0.8"/>
+</svg>

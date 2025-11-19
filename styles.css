@@ -1,0 +1,134 @@
+/* =========================================
+   🚀 HIRE IQ - FUTURISTIC UI THEME
+   ========================================= */
+
+/* 1. Google Fonts (Orbitron for Headers, Inter for Body) */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --neon-cyan: #00f3ff;
+    --neon-purple: #bc13fe;
+    --bg-dark: #050505;
+    --glass-bg: rgba(20, 20, 30, 0.7);
+    --border-color: rgba(0, 243, 255, 0.3);
+}
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    color: #e0e0e0;
+}
+
+/* 2. Animated Cyberpunk Background */
+.stApp {
+    background-color: var(--bg-dark);
+    background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, #0f1525 0%, #000000 100%);
+    background-size: 40px 40px, 40px 40px, 100% 100%;
+}
+
+/* 3. Headers (Sci-Fi Style) */
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+}
+
+/* 4. Futuristic Buttons */
+div.stButton > button {
+    background: transparent;
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 5px;
+    padding: 12px 28px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+div.stButton > button:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 25px var(--neon-cyan), 0 0 50px var(--neon-cyan);
+    border-color: transparent;
+    transform: scale(1.02);
+}
+
+/* 5. Glassmorphism Cards (Inputs & Metrics) */
+.stTextInput > div > div > input, 
+.stTextArea > div > div > textarea,
+div[data-testid="stMetric"],
+[data-testid="stForm"] {
+    background-color: rgba(10, 14, 23, 0.6) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: white !important;
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Input Focus Glow */
+.stTextInput > div > div > input:focus {
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
+}
+
+/* 6. Metric Values (Big Numbers) */
+div[data-testid="stMetricValue"] {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan) !important;
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* 7. Tabs Styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.stTabs [data-baseweb="tab"] {
+    height: 50px;
+    background-color: transparent;
+    color: #888;
+    border-radius: 5px 5px 0 0;
+    font-family: 'Orbitron', sans-serif;
+    border: none;
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: rgba(0, 243, 255, 0.1) !important;
+    color: var(--neon-cyan) !important;
+    border-bottom: 2px solid var(--neon-cyan) !important;
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* 8. Expander & Tables */
+.streamlit-expanderHeader {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}
+
+div[data-testid="stDataFrame"] {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* 9. Sidebar (If used) */
+[data-testid="stSidebar"] {
+    background-color: #020203;
+    border-right: 1px solid #333;
+}

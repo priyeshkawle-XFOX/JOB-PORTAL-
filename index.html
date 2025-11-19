@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Right hover area for logout button -->
+    <div id="right-hover-area"></div>
+    
+    <!-- Logout button container -->
+    <div id="logout-container">
+        <button id="logout-button" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <!-- Main container -->
+    <div class="container-fluid p-0">
+        <!-- IBM-themed header -->
+        <header class="ibm-header">
+            <div class="header-content">
+                <h1 style="text-align:center;">IBM Career Platform</h1>
+                <p style="text-align:center;">Powered by IBM Watson</p>
+            </div>
+        </header>
+
+        <!-- Main content area -->
+        <div class="content-area" id="main-content">
+            <!-- Login/Signup form will be shown here if not authenticated -->
+            <div id="login-container" class="auth-container">
+                <div class="auth-box">
+                    <h2>Welcome to IBM Career Platform</h2>
+                    <p>Sign in to access your career dashboard</p>
+                    
+                    <div class="auth-tabs">
+                        <div class="tab-selector">
+                            <button class="tab-btn active" data-tab="login">Login</button>
+                            <button class="tab-btn" data-tab="signup">Sign Up</button>
+                        </div>
+                        
+                        <!-- Login Form -->
+                        <div class="tab-content active" id="login-tab">
+                            <form id="login-form">
+                                <div class="form-group">
+                                    <label for="login-username">Username</label>
+                                    <input type="text" id="login-username" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="login-password">Password</label>
+                                    <input type="password" id="login-password" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                </div>
+                                <div id="login-error" class="error-message"></div>
+                            </form>
+                        </div>
+                        
+                        <!-- Signup Form -->
+                        <div class="tab-content" id="signup-tab">
+                            <form id="signup-form">
+                                <div class="form-group">
+                                    <label for="signup-username">Username</label>
+                                    <input type="text" id="signup-username" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signup-password">Password</label>
+                                    <input type="password" id="signup-password" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signup-confirm-password">Confirm Password</label>
+                                    <input type="password" id="signup-confirm-password" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                                </div>
+                                <div id="signup-error" class="error-message"></div>
+                                <div id="signup-success" class="success-message"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main application content will be shown here if authenticated -->
+            <div id="app-container" class="app-container" style="display: none;">
+                <div class="welcome-message">
+                    <h2>Welcome, <span id="username-display">User</span>!</h2>
+                    <p>Explore tools to analyze your resume, find job matches, and get career advice.</p>
+                </div>
+                
+                <!-- Tabs navigation -->
+                <ul class="nav nav-tabs" id="app-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume" type="button" role="tab">Resume Analyzer</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="jobs-tab" data-bs-toggle="tab" data-bs-target="#jobs" type="button" role="tab">Job Search</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="career-tab" data-bs-toggle="tab" data-bs-target="#career" type="button" role="tab">Career Advisor</button>
+                    </li>
+                </ul>
+                
+                <!-- Tab content -->
+                <div class="tab-content" id="app-tabs-content">
+                    <!-- Resume Analyzer Tab -->
+                    <div class="tab-pane fade show active" id="resume" role="tabpanel">
+                        <div class="section-container">
+                            <h3>Resume Analyzer</h3>
+                            <p>Upload your resume to extract skills and get personalized feedback.</p>
+                            
+                            <div class="upload-container">
+                                <label for="resume-upload" class="upload-label">
+                                    <i class="fas fa-file-upload"></i>
+                                    <span>Upload Resume (PDF or DOCX)</span>
+                                </label>
+                                <input type="file" id="resume-upload" accept=".pdf,.docx" style="display: none;">
+                                <div id="file-name" class="file-name"></div>
+                                <button id="analyze-btn" class="btn btn-primary" disabled>Analyze Resume</button>
+                            </div>
+                            
+                            <div id="resume-results" class="results-container" style="display: none;">
+                                <!-- Results will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Job Search Tab -->
+                    <div class="tab-pane fade" id="jobs" role="tabpanel">
+                        <div class="section-container">
+                            <h3>Job Search</h3>
+                            <p>Find job recommendations based on your skills and preferences.</p>
+                            
+                            <div id="job-search-container">
+                                <!-- Will be populated if resume has been analyzed -->
+                                <div id="no-resume-warning" class="alert alert-warning">
+                                    Please upload your resume in the Resume Analyzer tab first.
+                                </div>
+                                
+                                <div id="job-search-form" style="display: none;">
+                                    <!-- Job search form will be populated by JavaScript -->
+                                </div>
+                                
+                                <div id="job-results" class="results-container" style="display: none;">
+                                    <!-- Job results will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Career Advisor Tab -->
+                    <div class="tab-pane fade" id="career" role="tabpanel">
+                        <div class="section-container">
+                            <h3>Career Advisor Bot</h3>
+                            <p>Get personalized career advice based on your skills and experience.</p>
+                            
+                            <div id="career-advisor-container">
+                                <!-- Will be populated if resume has been analyzed -->
+                                <div id="no-resume-warning-career" class="alert alert-warning">
+                                    Please upload your resume in the Resume Analyzer tab first.
+                                </div>
+                                
+                                <div id="career-advice-form" style="display: none;">
+                                    <!-- Career advice form will be populated by JavaScript -->
+                                </div>
+                                
+                                <div id="career-advice-results" class="results-container" style="display: none;">
+                                    <!-- Career advice results will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IBM-themed footer -->
+        <footer class="ibm-footer">
+            <p>© 2023 IBM Career Platform | Powered by IBM Watson</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-radar"></script>
+    <script src="script.js"></script>
+</body>
+</html>
